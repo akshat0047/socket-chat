@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "12.13.0"
+
+cache:
+- node_modules
+
+before_install:
+- npm install -g npm
+
+script:
+- npm install
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: oXd0YOeWsTsJO6hBshy1DaqdFNm/IJ6+uH5KCbj7TnC3NRA62kHHsMfHMH4V+MNyrFDvxkaRR6pGWI7Lh9KwHJGSVNSnhEG6ut1waYy2hS8il6IVgizRSyaXjJyK1+yYyb5WGP97PCaKc8/F9b+PTVyZpAmseCLfLdfDUS+lYsIUkalS0kLkFNftK4ce1KjRh5m2QREBMU7KM3kOtVuQ7WIeYifeqjhfWbD6QwI4eSdVKWqn8BD9zKXh6eeesNvDSMjQIJ5o545HfcB4UFDIy7boBizsGwD2TqxPcMwfSrJVvmvPq8rtuICuFdjQJrMt/asloerbAkf7yz8UFNeMIsWC+8fQnFyaIt3nWsuq/YvTA3qnyogvisrNOmYIWEkLyWObElCq0aFMuJSayNaoghzrqc2asGe8gnIkHFlsiMAWrlfp3TT3a/9XzdFltiNXhHGBd9aops6hx3O7xZTh/y8GMKedJRSnOxr+QwnUE3c53eP+F/3H0YLCwY2rI8DrEygRLkV7JOXZASZXYUTGFfj53RFYRnmAhovsq5MfJ52HijR6BzTjzcKG1oImWJ4il1+1GTBzBkET7ID3R6xON/XS+07RHp4r0cDGASvS4rxwund4iufm/gzfZK1391MdAh8hM76yaIUiRArR7w0np9gPTfz1b7BJ5j+Bu98YL18=
+  app: alias-chat
+  on: 
+    repo: akshat0047/socket-chat
