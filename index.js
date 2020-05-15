@@ -3,7 +3,16 @@ var socket = require('socket.io');
 
 // app
 var app = express();
-var server = app.listen(process.env.TIMES || 4000, ()=>{
+
+app.set('view engine', 'ejs');
+
+app.get('/', function(req, res) {
+    res.render('index');
+});
+
+var port = process.env.PORT
+
+var server = app.listen(port || 4000, ()=>{
     console.log('App listening on 4000');
 });
 

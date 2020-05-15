@@ -18,3 +18,4 @@ deploy:
   app: alias-chat
   on: 
     repo: akshat0047/socket-chat
+    branch: master
