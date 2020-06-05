@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:4000');
+var socket = io.connect('https://alias-chat.herokuapp.com');
 
 // Query DOM
 var message = document.getElementById('message'),
@@ -7,6 +7,7 @@ var message = document.getElementById('message'),
       feedback = document.getElementById('feedback'),
       name = document.getElementById('hide-em-user').innerHTML,
       room = document.getElementById('hide-em-room').innerHTML;
+      mywindow = document.getElementById("conf");
 
 socket.emit('joinRoom', { name , room })
 
@@ -18,7 +19,7 @@ btn.addEventListener('click', function(){
   message.value = "";
 });
 
-message.addEventListener('keypress', function(){
+message.addEventListener('keyup', function(){
     socket.emit('typing');
 })
 
@@ -41,74 +42,79 @@ socket.on('exit', function(data){
     output.innerHTML += '<div style="margin:auto; text-align:center">' + data + '</div>';
 });
 
-// Local Video
+// Video Handling
+mywindow.addEventListener('click', function(){
+  getMedia({ 
+    video:{
+      frameRate: 60.0,
+      height:300,
+     brightness: 2000.0
+    } , 
+    audio:{
+    sampleSize: 8,
+    echoCancellation: true} 
+  });
+  callUser(room);
+})
 
+async function getMedia(constraints) {
+  let stream = null;
 
-    const controls = document.querySelector('.controls');
-    const cameraOptions = document.querySelector('.video-options>select');
-    const video = document.querySelector('video');
-    const canvas = document.querySelector('canvas');
-    const screenshotImage = document.querySelector('img');
-    const buttons = [...controls.querySelectorAll('button')];
-    let streamStarted = false;
+  try {
+    stream = await navigator.mediaDevices.getUserMedia(constraints);
+
+    const localVideo = document.getElementById("local-video");
+    if (localVideo) {
+       localVideo.srcObject = stream;
+
+       stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
+     }
+   } catch(err) {
+    console.log(err);
+  }
+}
+
+const { RTCPeerConnection, RTCSessionDescription } = window;
+peerConnection = new RTCPeerConnection();
+
+async function callUser(roomn) {
+  const offer = await peerConnection.createOffer();
+  await peerConnection.setLocalDescription(new RTCSessionDescription(offer));
+  
+  socket.emit("call-user", {
+    offer,
+    id: roomn
+  });
+}
+
+socket.on("call-made", async data => {
+  await peerConnection.setRemoteDescription(
+    new RTCSessionDescription(data.offer)
+  );
+  const answer = await peerConnection.createAnswer();
+  await peerConnection.setLocalDescription(new RTCSessionDescription(answer));
+  
+  socket.emit("make-answer", {
+    answer,
+    to: data.socket
+  });
+ });
+
+ socket.on("answer-made", async data => {
+  await peerConnection.setRemoteDescription(
+    new RTCSessionDescription(data.answer)
+  );
+  
+  if (!isAlreadyCalling) {
+    callUser(data.socket);
+    isAlreadyCalling = true;
+  }
+ });
     
-    const [play, pause, screenshot] = buttons;
-    
-    const constraints = {
-      video: {
-        width: {
-          min: 1280,
-          ideal: 1920,
-          max: 2560,
-        },
-        height: {
-          min: 720,
-          ideal: 1080,
-          max: 1440
-        },
-      }
-    };
-    
-    const getCameraSelection = async () => {
-      const devices = await navigator.mediaDevices.enumerateDevices();
-      const videoDevices = devices.filter(device => device.kind === 'videoinput');
-      const options = videoDevices.map(videoDevice => {
-        return `<option value="${videoDevice.deviceId}">${videoDevice.label}</option>`;
-      });
-      cameraOptions.innerHTML = options.join('');
-    };
-    
-    play.onclick = () => {
-      if (streamStarted) {
-        video.play();
-        play.classList.add('d-none');
-        pause.classList.remove('d-none');
-        return;
-      }
-      if ('mediaDevices' in navigator && navigator.mediaDevices.getUserMedia) {
-        const updatedConstraints = {
-          ...constraints,
-          deviceId: {
-            exact: cameraOptions.value
-          }
-        };
-        startStream(updatedConstraints);
-      }
-    };
-    
-    const startStream = async (constraints) => {
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
-      handleStream(stream);
-    };
-    
-    const handleStream = (stream) => {
-      video.srcObject = stream;
-      play.classList.add('d-none');
-      pause.classList.remove('d-none');
-      screenshot.classList.remove('d-none');
-      streamStarted = true;
-    };
-    
-    getCameraSelection();
-    
-    
+ peerConnection.ontrack = function({ streams: [stream] }) {
+  const remoteVideo = document.getElementById("remote-video");
+  if (remoteVideo) {
+    remoteVideo.srcObject = stream;
+  }
+ };
+

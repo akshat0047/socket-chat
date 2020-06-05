@@ -43,10 +43,25 @@ io.on('connection', function(socket){
      socket.on('typing', () => {
         socket.broadcast.to(user.room).emit('typing', user.username);
     });
+    
+    // Video Call
+    socket.on("call-user", data => {
+        socket.to(data.room).emit("call-made", {
+          offer: data.offer,
+          socket: user.id
+        });
+      });
+
+    socket.on("make-answer", data => {
+      socket.to(user.room).emit("answer-made", {
+        socket: user.id,
+        answer: data.answer
+      });
+    });
 
     // Broadcast leaving to everyone
     socket.on('disconnect', () => {
         io.to(user.room).emit('exit', `${user.username} has left the chat`);
     });
-});   
+});
 });
