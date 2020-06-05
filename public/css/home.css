@@ -1,0 +1,27 @@
+.background{
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.login-panel{
+    position: fixed;
+    width:30%;
+    margin:auto;
+    top:24%;
+    bottom:0px;
+    left:0px;
+    right:0px;
+}
+
+.submit-btn{
+    color: white;
+    background-color: rgb(240, 153, 72);
+}
+
+form{
+    position: relative;
+    border-radius: 4px;
+    box-shadow: 0 0 2px 2px rgba(0,0,0,0.1);
+    padding: 8%;
+}

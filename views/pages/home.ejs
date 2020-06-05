@@ -1,0 +1,29 @@
+<!-- views/pages/home.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ('../partials/head.ejs') %>
+    <link href="css/home.css" rel="stylesheet">
+</head>
+<body>
+<div class="background">
+<div class="login-panel">
+ <div class="container">
+    <form action="/join" method="POST">
+        <div class="form-group">
+          <label for="room">User</label>
+          <input type="text" name="user" class="form-control" id="room" aria-describedby="emailHelp">
+          <small id="emailHelp" class="form-text text-muted">We recommend you to use a meaningful name.</small>
+        </div>
+        <div class="form-group">
+          <label for="room">Room</label>
+          <input type="text" name="room" class="form-control" id="room">
+        </div>
+        <button type="submit" class="btn submit-btn">Submit</button>
+      </form>
+    </div>
+</div>
+</div>
+</body>
+</html>

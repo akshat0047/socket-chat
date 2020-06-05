@@ -1,37 +1,52 @@
-var express = require('express');
-var socket = require('socket.io');
+const express = require('express'),
+     socket = require('socket.io'),
+     path = require('path'),
+     route = require('./routes/home'),
+     bodyParser = require('body-parser'),
+     formatMessage = require('./utils/process'),
+     { userJoin, getCurrentUser } = require('./utils/users');
 
-// app
+
 var app = express();
 
+app.set('port', process.env.PORT || 4000);
 app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
 
-app.get('/', function(req, res) {
-    res.render('index');
-});
+app.use(bodyParser.urlencoded({ extended:true }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', route);
 
-var port = process.env.PORT
-
-var server = app.listen(port || 4000, ()=>{
+var server = app.listen(app.get('port'), ()=>{
     console.log('App listening on 4000');
 });
 
-//Static Files
-app.use(express.static('public'));
 
 //Socket Setup
 var io = socket(server);
 
 io.on('connection', function(socket){
+    console.log("connection made");
+    socket.on('joinRoom', data => {
+       const user = userJoin(socket.id, data.name, data.room);
+       socket.join(user.room);
+
+    // Broadcast joining to everyone
+    socket.broadcast.to(user.room).emit('entry', `${user.username} has joined the chat`);
 
     // Handle typing event
-    console.log('made socket connection');
     socket.on('chat', data => {
-        io.sockets.emit('chat', data);
+        io.sockets.to(user.room).emit('chat', formatMessage(user.username, data.message, user.color));
     });
 
      // Handle typing event
-     socket.on('typing', function(data){
-        socket.broadcast.emit('typing', data);
+     socket.on('typing', () => {
+        socket.broadcast.to(user.room).emit('typing', user.username);
     });
+
+    // Broadcast leaving to everyone
+    socket.on('disconnect', () => {
+        io.to(user.room).emit('exit', `${user.username} has left the chat`);
+    });
+});   
 });
