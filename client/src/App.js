@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 import Home from './pages/home';
 import Chat from './pages/chat/index'
 
-const socket = io("https://socket-chat.onrender.com", {
+const socket = io("https://socket-chat-vr6j.onrender.com", {
   withCredentials: true,
   transports: ['websocket', 'polling'],
 });
