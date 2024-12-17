@@ -1,0 +1,451 @@
+@media (orientation: landscape) {
+    .chatContainer {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: flex-start;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .chatRightView {
+        position: relative;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    /* Room and users component */
+    .roomAndUsersColumn {
+        position: relative;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-right: 1px solid #dfdfdf;
+        padding: 5vh 0;
+    }
+    .roomTitle {
+        text-align: center;
+        text-transform: capitalize;
+        font-size: 2rem;
+        color: #fff;
+    }
+    .userLeftBox {
+        position: relative;
+        padding: 0 4vw;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .userBox {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: flex-start;
+        top: 15vh;
+        height: 50vh;
+    }
+    .usersTitle {
+        position: relative;
+        font-size: 1rem;
+        color: #fff;
+    }
+    .usersList {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        max-height: 40vh;
+        overflow: scroll;
+        margin: 0px !important;
+        padding: 5vh 10px 10vh 10px;
+        gap: 10px;
+        margin-top: 10vh;
+        list-style-type: none;
+        color: rgb(153, 217, 234);
+        padding: 0px;
+    }
+    .userListItem {
+        text-align: center;
+        background: #30336b;
+        border-radius: 5px;
+        padding: 3px;
+        font-size: 0.8em;
+    }
+
+    .portraitIcons {
+        display: flex;
+        justify-content: center;
+    }
+
+    .modalBtn {
+        display: none;
+    }
+
+    .leaveBtn {
+        position: relative;
+        text-align: center;
+        width: 100%;
+    }
+
+    .leaveBtn i {
+        display: none;
+    }
+
+    .leaveBtn button {
+        padding: 3px;
+        width: 60%;
+    }
+    
+    /* Messages */
+    .messagesColumn {
+        position: relative;
+        width:  100%;
+        height: 85vh;
+        display: flex;
+        flex-direction: column;
+        overflow: scroll;
+        padding: 10px 40px;
+        box-sizing: border-box;
+    }
+    .leftMsg, .rightMsg {
+        position: relative;
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        background: #30336b;
+        border-radius: 6px;
+        padding: 10px 10px 0 10px;
+        margin: 8px 0;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        word-wrap: break-word;
+    }
+    .leftMsg::before {
+        content: ""; 
+        position: absolute; 
+        border-left: 8px solid #30336b; 
+        border-right: 8px solid transparent; 
+        border-top: 8px solid #30336b; 
+        border-bottom: 8px solid transparent; 
+        top: 0px;
+        left: -10px; 
+        transform: scaleX(-1)
+    }
+    .rightMsg {
+       justify-self: flex-end;
+       align-self: flex-end;
+    }
+    .rightMsg::before {
+        content: ""; 
+        position: absolute; 
+        border-left: 8px solid #30336b; 
+        border-right: 8px solid transparent; 
+        border-top: 8px solid #30336b; 
+        border-bottom: 8px solid transparent; 
+        top: 0px;
+        right: -10px; 
+    }
+    .msgUser {
+        color: rgb(153, 217, 234);
+        font-size: 0.75rem;
+        margin-bottom: 2px;
+    }
+    .msgMeta {
+        position: relative;
+        color: rgb(153, 217, 234);
+        font-size: 0.6rem;
+        align-self: flex-end;
+        text-align: right;
+        margin-top: 3px;
+        margin-bottom: 5px;
+    }
+    .msgText {
+        font-size: 0.85em;
+        color: #fff;
+        margin: 0;
+    }
+    
+    /* Message input and button */
+    .sendMessageContainer {
+        position: relative;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px;
+        background: #273c75;
+    }
+    .messageInput {
+        padding: 14px;
+        width: 65vw;
+        border-radius: 6px;
+        border: 1px solid rgb(153, 217, 234);
+        font-size: 0.9rem;
+    }
+    .sendBtn button {
+        display: block;
+        font-size: 1em;
+    }
+    .sendBtn i {
+        display: none;
+    }
+}
+
+@media (orientation: portrait) {
+    .chatContainer {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .chatRightView {
+        position: relative;
+        width: 100%;
+        height: 93vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    /* Room and users component */
+    .roomAndUsersColumn {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2vh;
+        height: 5vh;
+        border-bottom: 1px solid #dfdfdf;
+        background: #273c75;
+    }
+    .roomTitle {
+        text-align: center;
+        text-transform: capitalize;
+        font-size: 2rem;
+        color: #fff;
+    }
+    .userLeftBox {
+        position: relative;
+        display: flex;
+        text-align: center;
+    }
+    .userBox {
+        display: none;
+    }
+    .usersTitle {
+        font-size: 1rem;
+        color: #fff;
+    }
+    .usersList {
+        position: relative;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        list-style-type: none;
+        color: rgb(153, 217, 234);
+    }
+    .userListItem {
+        text-align: center;
+        background: #30336b;
+        border-radius: 5px;
+        padding: 5px;
+        font-size: 0.8em;
+    }
+
+    .portraitIcons {
+        display: flex;
+        gap: 10vw;
+        padding: 0 2vw 0 0;
+    }
+
+    .leaveBtn {
+        position: relative;
+        text-align: center;
+    }
+
+    .leaveBtn i {
+        display: block;
+        color: white;
+        cursor: pointer;
+        font-size: 1.2em;
+    }
+
+    .leaveBtn button {
+        display: none;
+    }
+
+    .modalBtn {
+        position: relative;
+        text-align: center;
+    }
+
+    .modalBtn i {
+        display: block;
+        color: white;
+        cursor: pointer;
+        font-size: 1.2em;
+    }
+
+    .modalBtn button {
+        display: none;
+    }
+
+    /* Modal Styles */
+    .modalOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+    
+    .modalContent {
+        background: lightblue;
+        padding: 20px;
+        border-radius: 8px;
+        width: 70%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .modalHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    
+    .modalTitle {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    
+    .closeModal {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+    
+    .modalBody {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    
+    /* Messages */
+    .messagesColumn {
+        position: relative;
+        height: 84vh;
+        overflow: scroll;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+    .leftMsg, .rightMsg {
+        position: relative;
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        background: #30336b;
+        border-radius: 6px;
+        padding: 10px 10px 0 10px;
+        margin: 8px 0;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        word-wrap: break-word;
+    }
+    .leftMsg::before {
+        content: ""; 
+        position: absolute; 
+        border-left: 8px solid #30336b; 
+        border-right: 8px solid transparent; 
+        border-top: 8px solid #30336b; 
+        border-bottom: 8px solid transparent; 
+        top: 0px;
+        left: -10px; 
+        transform: scaleX(-1)
+    }
+    .rightMsg {
+       justify-self: flex-end;
+       align-self: flex-end;
+    }
+    .rightMsg::before {
+        content: ""; 
+        position: absolute; 
+        border-left: 8px solid #30336b; 
+        border-right: 8px solid transparent; 
+        border-top: 8px solid #30336b; 
+        border-bottom: 8px solid transparent; 
+        top: 0px;
+        right: -10px; 
+    }
+    .msgUser {
+        color: rgb(153, 217, 234);
+        font-size: 0.75rem;
+        margin-bottom: 2px;
+    }
+    .msgMeta {
+        position: relative;
+        color: rgb(153, 217, 234);
+        font-size: 0.65rem;
+        align-self: flex-end;
+        text-align: right;
+        margin-top: 3px;
+        margin-bottom: 5px;
+    }
+    .msgText {
+        font-size: 0.85em;
+        color: #fff;
+        margin: 0;
+    }
+    
+    /* Message input and button */
+    .sendMessageContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       
+        height: 8vh;
+        background: #273c75;
+        gap: 3.5vw;
+        
+    }
+    .messageInput {
+        width: 78%;
+        border-radius: 6px;
+        border: 1px solid rgb(153, 217, 234);
+        font-size: 1rem;
+        height: 4vh;
+        padding: 5px;
+    }
+    .sendBtn {
+        position: relative;
+        width: 9%;
+        height: 4vh;
+        padding: 5px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+    }
+    .sendBtn button {
+        display: none;
+    }
+    .sendBtn i {
+        position: relative;
+        display: block;
+        font-size: 1.4em;
+        color: #273c75;
+        right: 1px;
+    }
+}
