@@ -2,7 +2,7 @@
     .chatContainer {
         position: relative;
         width: 100%;
-        height: 100vh;
+        height: 100dvh;
         display: flex;
         justify-content: flex-start;
         margin: 0;
@@ -25,7 +25,7 @@
         flex-direction: column;
         justify-content: space-between;
         border-right: 1px solid #dfdfdf;
-        padding: 5vh 0;
+        padding: 5dvh 0;
     }
     .roomTitle {
         text-align: center;
@@ -35,7 +35,7 @@
     }
     .userLeftBox {
         position: relative;
-        padding: 0 4vw;
+        padding: 0 4dvw;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -46,8 +46,8 @@
         flex-direction: column;
         gap: 20px;
         justify-content: flex-start;
-        top: 15vh;
-        height: 50vh;
+        top: 15dvh;
+        height: 50dvh;
     }
     .usersTitle {
         position: relative;
@@ -58,12 +58,12 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        max-height: 40vh;
+        max-height: 40dvh;
         overflow: scroll;
         margin: 0px !important;
-        padding: 5vh 10px 10vh 10px;
+        padding: 5dvh 10px 10dvh 10px;
         gap: 10px;
-        margin-top: 10vh;
+        margin-top: 10dvh;
         list-style-type: none;
         color: rgb(153, 217, 234);
         padding: 0px;
@@ -104,7 +104,7 @@
     .messagesColumn {
         position: relative;
         width:  100%;
-        height: 85vh;
+        height: 85dvh;
         display: flex;
         flex-direction: column;
         overflow: scroll;
@@ -179,7 +179,7 @@
     }
     .messageInput {
         padding: 14px;
-        width: 65vw;
+        width: 65dvw;
         border-radius: 6px;
         border: 1px solid rgb(153, 217, 234);
         font-size: 0.9rem;
@@ -194,9 +194,16 @@
 }
 
 @media (orientation: portrait) {
+
+
+    body, html {
+        margin: 0;
+        padding: 0;
+      }
+
     .chatContainer {
         position: relative;
-        height: 100vh;
+        height: 100dvh;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -207,7 +214,7 @@
     .chatRightView {
         position: relative;
         width: 100%;
-        height: 93vh;
+        height: 93dvh;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -219,8 +226,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 2vh;
-        height: 5vh;
+        padding: 2dvh;
+        height: 5dvh;
         border-bottom: 1px solid #dfdfdf;
         background: #273c75;
     }
@@ -261,8 +268,8 @@
 
     .portraitIcons {
         display: flex;
-        gap: 10vw;
-        padding: 0 2vw 0 0;
+        gap: 10dvw;
+        padding: 0 2dvw 0 0;
     }
 
     .leaveBtn {
@@ -302,8 +309,8 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 100vw;
-        height: 100vh;
+        width: 100dvw;
+        height: 100dvh;
         background: rgba(0, 0, 0, 0.5);
         display: flex;
         justify-content: center;
@@ -346,7 +353,7 @@
     /* Messages */
     .messagesColumn {
         position: relative;
-        height: 84vh;
+        height: 84dvh;
         overflow: scroll;
         padding: 15px;
         box-sizing: border-box;
@@ -414,9 +421,9 @@
         align-items: center;
         justify-content: center;
        
-        height: 8vh;
+        height: 8dvh;
         background: #273c75;
-        gap: 3.5vw;
+        gap: 3.5dvw;
         
     }
     .messageInput {
@@ -424,13 +431,13 @@
         border-radius: 6px;
         border: 1px solid rgb(153, 217, 234);
         font-size: 1rem;
-        height: 4vh;
+        height: 4dvh;
         padding: 5px;
     }
     .sendBtn {
         position: relative;
         width: 9%;
-        height: 4vh;
+        height: 4dvh;
         padding: 5px;
         border-radius: 50%;
         display: flex;
